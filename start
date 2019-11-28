@@ -51,7 +51,7 @@ if [ "$URL" != $value ]; then
 	
 	if [ ! -d /home/container/data ]; then
 		mkdir /home/container/data
-		chmod +drwx-rwx /home/container/data
+		chmod -R 774 /home/container/data
 	fi
 
 	echo "$URL" > "/home/container/current-installed"

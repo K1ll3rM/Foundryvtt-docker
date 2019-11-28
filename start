@@ -16,7 +16,7 @@ if [ "$URL" != $value ]; then
 		rm /home/container/temp -rf
 	fi
 
-	TMPFILE=`mktemp`
+	TMPFILE=/home/container/foundry.zip
 	wget "$URL" -O "$TMPFILE"
 	unzip "$TMPFILE" -d /home/container/temp
 	rm "$TMPFILE"

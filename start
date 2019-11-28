@@ -59,7 +59,7 @@ if [ "$URL" != $value ]; then
 fi
 
 if [ -r /home/container/app/main.js ]; then
-	node main.js --headless --dataPath/home/container/data
+	node main.js --headless --dataPath=/home/container/data
 else
 	echo "Failed to find main.js"
 fi

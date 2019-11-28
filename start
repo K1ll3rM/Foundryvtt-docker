@@ -1,0 +1,64 @@
+#!/bin/bash
+
+if [ -z "$URL" ]; then
+	echo "No url was given. Please use -e URL={url} to set the url to the zip file of foundry."
+	exit 1
+fi
+
+if [ -r /home/container/current-installed ]; then
+	value=$(</home/container/current-installed)
+else
+	value="none"
+fi
+
+if [ "$URL" != $value ]; then
+	if [ -d /home/container/temp ]; then
+		rm /home/container/temp -rf
+	fi
+
+	TMPFILE=`mktemp`
+	wget "$URL" -O "$TMPFILE"
+	unzip "$TMPFILE" -d /home/container/temp
+	rm "$TMPFILE"
+
+	if [ -d /home/container/app ]; then
+		mkdir /home/container/temp/userdata
+		if [ -d /home/container/app/worlds ]; then
+			mv /home/container/app/worlds /home/container/temp/userdata/worlds
+		fi
+		if [ -d /home/container/app/modules ]; then
+			mv /home/container/app/modules /home/container/temp/userdata/modules
+		fi
+		if [ -d /home/container/app/systems ]; then
+			mv /home/container/app/systems /home/container/temp/userdata/systems
+		fi
+		
+		rm /home/container/app -rf
+		
+		#If the structure of the .zip changes you can change this path to point to the new app directory location
+		mv /home/container/temp/resources/app /home/container/app
+		
+		if [ -d /home/container/temp/userdata ]; then
+			mv /home/container/temp/userdata/* /home/container/app -f
+		fi
+	else
+		mv /home/container/temp/resources/app /home/container/app
+	fi
+
+	rm /home/container/temp -rf
+	
+	if [ ! -d /home/container/.local/share ]; then
+		mkdir /home/container/.local
+		mkdir /home/container/.local/share
+	fi
+
+	echo "$URL" > "/home/container/current-installed"
+	cd /home/container/app || exit
+	npm install
+fi
+
+if [ -r /home/container/app/main.js ]; then
+	node main.js --headless
+else
+	echo "Failed to find main.js"
+fi

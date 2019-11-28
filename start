@@ -18,7 +18,9 @@ if [ "$URL" != $value ]; then
 
 	TMPFILE=/home/container/foundry.zip
 	wget "$URL" -O "$TMPFILE"
-	unzip "$TMPFILE" -d /home/container/temp
+	echo "Unzipping file"
+	unzip "$TMPFILE" -q -d /home/container/temp
+	echo "Done unzipping"
 	rm "$TMPFILE"
 
 	if [ -d /home/container/app ]; then

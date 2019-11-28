@@ -1,4 +1,4 @@
-# Foundryvtt-docker
+# Foundry VTT docker
 A docker image for Foundry VTT made to be compatible with Pterodactyl.
 This is the first docker image I made from scratch so most things will probably be done badly, any improvements are much appreciated!
 

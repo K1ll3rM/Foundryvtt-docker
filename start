@@ -55,7 +55,7 @@ if [ "$URL" != $value ]; then
 
 	echo "$URL" > "/home/container/current-installed"
 	cd /home/container/app || exit
-	npm install --silent
+	npm install --quiet --no-progress
 fi
 
 if [ -r /home/container/app/main.js ]; then

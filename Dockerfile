@@ -1,6 +1,6 @@
 FROM node:12-alpine
 
-MAINTAINER K1ll3rM, <k1ll3rM.99@gmail.com>
+MAINTAINER K1ll3rM
 
 RUN apk add --no-cache --update unzip bash \
     && mkdir -m 777 /home/container \

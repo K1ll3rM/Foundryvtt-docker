@@ -24,29 +24,10 @@ if [ "$URL" != $value ]; then
 	rm "$TMPFILE"
 
 	if [ -d /home/container/app ]; then
-		mkdir /home/container/temp/userdata
-		if [ -d /home/container/app/worlds ]; then
-			mv /home/container/app/worlds /home/container/temp/userdata/worlds
-		fi
-		if [ -d /home/container/app/modules ]; then
-			mv /home/container/app/modules /home/container/temp/userdata/modules
-		fi
-		if [ -d /home/container/app/systems ]; then
-			mv /home/container/app/systems /home/container/temp/userdata/systems
-		fi
-		
 		rm /home/container/app -rf
-		
-		#If the structure of the .zip changes you can change this path to point to the new app directory location
-		mv /home/container/temp/resources/app /home/container/app
-		
-		if [ -d /home/container/temp/userdata ]; then
-			mv /home/container/temp/userdata/* /home/container/app -f
-		fi
-	else
-		mv /home/container/temp/resources/app /home/container/app
 	fi
 
+  mv /home/container/temp/resources/app /home/container/app
 	rm /home/container/temp -rf
 	
 	if [ ! -d /home/container/data ]; then

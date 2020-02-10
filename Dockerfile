@@ -1,13 +1,10 @@
-FROM node:12-stretch
+FROM node:12-alpine
 
 MAINTAINER K1ll3rM
 
-RUN apt-get update
-RUN apt-get install dos2unix
-
-RUN apt-get install unzip bash \
+RUN apk add --no-cache --update unzip bash \
     && mkdir -m 777 /home/container \
-    && adduser --home /home/container container
+    && adduser --u 2000 -D -h /home/container container
 
 WORKDIR /home/container
 

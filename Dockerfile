@@ -1,10 +1,13 @@
-FROM node:12
+FROM node:12-stretch
 
 MAINTAINER K1ll3rM
 
-RUN apt-get install unzip bash dos2unix \
+RUN apt-get update
+RUN apt-get install dos2unix
+
+RUN apt-get install unzip bash \
     && mkdir -m 777 /home/container \
-    && adduser --u 2000 -D -h /home/container container
+    && adduser --home /home/container container
 
 WORKDIR /home/container
 

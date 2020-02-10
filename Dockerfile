@@ -2,7 +2,7 @@ FROM node:12
 
 MAINTAINER K1ll3rM
 
-RUN apk add --no-cache --update unzip bash \
+RUN apt-get install unzip bash \
     && mkdir -m 777 /home/container \
     && adduser --u 2000 -D -h /home/container container
 

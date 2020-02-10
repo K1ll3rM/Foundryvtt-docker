@@ -2,7 +2,7 @@ FROM node:12
 
 MAINTAINER K1ll3rM
 
-RUN apt-get install unzip bash \
+RUN apt-get install unzip bash dos2unix \
     && mkdir -m 777 /home/container \
     && adduser --u 2000 -D -h /home/container container
 

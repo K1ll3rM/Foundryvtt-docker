@@ -7,14 +7,18 @@ RUN apk add --no-cache --update unzip bash su-exec \
     && adduser --u 2000 -D -h /home/container container
 
 WORKDIR /home/container
+RUN chmod -R 777 /home/container
 
 EXPOSE 30000
 
 COPY ./start /start
 RUN dos2unix /start
 
-USER root
+COPY ./addUID /addUID
+RUN chmod +x /addUID
+RUN bash /addUID
+
+USER container
 ENV  USER=container HOME=/home/container
 
-CMD ["id", "-u"]
-#CMD ["su-exec", "container", "/bin/bash", "/start"]
+CMD ["/bin/bash", "/start"]

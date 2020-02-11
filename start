@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "$STARTUP" ]; then
+	URL="$STARTUP"
+	echo "STARTUP variable found, using $STARTUP as url instead"
+fi
+
 if [ -z "$URL" ]; then
 	echo "No url was given. Please use -e URL={url} to set the url to the zip file of foundry."
 	exit 1

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Add 999 to file for Pterodactyl
+echo "dummy:x:999:999:Dummy,,,:/home/container:/bin/bash" >> /etc/passwd

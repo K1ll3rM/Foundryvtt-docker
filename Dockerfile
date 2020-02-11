@@ -2,7 +2,7 @@ FROM node:12-alpine
 
 MAINTAINER K1ll3rM
 
-RUN apk add --no-cache --update unzip bash \
+RUN apk add --no-cache --update unzip bash su-exec \
     && mkdir -m 777 /home/container \
     && adduser --u 2000 -D -h /home/container container
 
@@ -13,7 +13,8 @@ EXPOSE 30000
 COPY ./start /start
 RUN dos2unix /start
 
-USER container
+#USER container
 ENV  USER=container HOME=/home/container
 
-CMD ["/bin/bash", "/start"]
+CMD ["cat", "/etc/passwd"]
+CMD ["su-exec", "container", "/bin/bash", "/start"]

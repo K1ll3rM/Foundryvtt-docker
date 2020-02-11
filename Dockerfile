@@ -2,12 +2,13 @@ FROM node:12-alpine
 
 MAINTAINER K1ll3rM
 
-RUN apk add --no-cache --update unzip bash \
+RUN apk add --no-cache --update unzip bash sudo \
     && mkdir -m 777 /home/container \
-    && adduser --u 2000 -D -h /home/container container \
-    && useradd -u 999 -d /home/container -ms /bin/bash pterdactyl
+    && adduser --u 2000 -D -h /home/container container
 
 WORKDIR /home/container
+
+EXPOSE 30000
 
 COPY ./start /start
 RUN dos2unix /start

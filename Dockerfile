@@ -13,8 +13,8 @@ EXPOSE 30000
 COPY ./start /start
 RUN dos2unix /start
 
-#USER container
+USER root
 ENV  USER=container HOME=/home/container
 
-CMD ["cat", "/etc/passwd"]
-CMD ["su-exec", "container", "/bin/bash", "/start"]
+CMD ["id", "-u"]
+#CMD ["su-exec", "container", "/bin/bash", "/start"]
